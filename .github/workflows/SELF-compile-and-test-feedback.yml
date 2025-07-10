@@ -4,6 +4,7 @@ permissions:
   actions: write
 
 on:
+  workflow_dispatch:
   push:
     branches: 
     - 'frontend/**'
