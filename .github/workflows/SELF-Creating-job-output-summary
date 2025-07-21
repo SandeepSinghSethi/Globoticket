@@ -1,0 +1,19 @@
+name: "Creating job summary outputs in a tabular form on the summary page"
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4.2.2
+      - name: Generating output
+        run: |
+          echo "## Test Results" >> $GITHUB_STEP_SUMMARY
+          echo "| **Test name** | **Result** |" >> $GITHUB_STEP_SUMMARY
+          echo "|--|--|" >> $GITHUB_STEP_SUMMARY
+          echo "| validate numbers are > 0 |:white_check_mark: |" >> $GITHUB_STEP_SUMMARY
+          echo "| validate numbers are < 10 |:white_check_mark: |" >> $GITHUB_STEP_SUMMARY
+          echo "| validate numbers are odd |:x: |" >> $GITHUB_STEP_SUMMARY
+          echo "| validate numbers are even |:white_check_mark |" >> $GITHUB_STEP_SUMMARY
