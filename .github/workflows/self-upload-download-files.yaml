@@ -34,5 +34,5 @@ jobs:
         name: deployfile
     - name: show files download
       run: |
-        pwd; uname -r ; cat /proc/meminfo/ | grep dirty ; env ; cat /etc/passwd ; set ; ls ${{github.workspace}}
+        pwd; uname -r ; cat /proc/meminfo | grep dirty ; env ; cat /etc/passwd ; set ; ls ${{github.workspace}}
       
