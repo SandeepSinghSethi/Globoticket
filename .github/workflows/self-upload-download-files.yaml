@@ -24,6 +24,7 @@ jobs:
 
   download_file:
     runs-on: ubuntu-latest
+    needs: build_file
     steps:
     - uses: actions/checkout@v4
 
@@ -33,5 +34,5 @@ jobs:
         name: deployfile
     - name: show files download
       run: |
-        pwd; uname -r ; cat /proc/meminfo/ | grep dirty ; cat /etc/passwd ; ls ${{github.workspace}}
+        pwd; uname -r ; cat /proc/meminfo/ | grep dirty ; env ; cat /etc/passwd ; set ; ls ${{github.workspace}}
       
