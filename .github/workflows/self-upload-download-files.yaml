@@ -26,13 +26,24 @@ jobs:
     runs-on: ubuntu-latest
     needs: build_file
     steps:
-    - uses: actions/checkout@v4
-
     - name: Downloading artifact
       uses: actions/download-artifact@4.3.0
       with:
         name: deployfile
     - name: show files download
       run: |
-        pwd; uname -r ; cat /proc/meminfo | grep dirty ; env ; cat /etc/passwd ; set ; ls ${{github.workspace}}
+        PWD=$(pwd)
+        MEM=$(cat /proc/meminfo|grep Dirty)
+        ENVIR=$(env)
+        SETT=$(set)
+        ETCPASS=$(cat /etc/passwd)
+        echo "| **CMD** | **OUTPUT** |" >> $GITHUB_STEP_SUMMARY
+        echo "|--|--|" >> $GITHUB_STEP_SUMMARY
+        echo "| PWD | $PWD |" >> $GITHUB_STEP_SUMMARY
+        echo "| MEM | $MEM |" >> $GITHUB_STEP_SUMMARY
+        echo "| ENVIR | $ENVIR |" >> $GITHUB_STEP_SUMMARY
+        echo "| SETT | $SETT |" >> $GITHUB_STEP_SUMMARY
+        echo "| ETCPASS | $ETCPASS |" >> $GITHUB_STEP_SUMMARY
+        
+        ls ${{github.workspace}}
       
