@@ -1,0 +1,37 @@
+name: SELF chapter 8 upload-download file artifacts
+
+on:
+  workflow_dispatch:
+#using envs for filename
+env:
+  deployment_file: "file-i-will-deploy"
+
+jobs:
+  build_file:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Creating the file
+      run: |
+        touch ${{github.workspace}}/${{env.deployment_file}}
+
+    - name: Uploading the file
+      uses: actions/upload-artifact@v4.6.2
+      with:
+        name: deployfile
+        path: ${{github.workspace}}/${{env.deployment_file}}
+
+  download_file:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Downloading artifact
+      uses: actions/download-artifact@4.3.0
+      with:
+        name: deployfile
+    - name: show files download
+      run: |
+        pwd; uname -r ; cat /proc/meminfo/ | grep dirty ; cat /etc/passwd ; ls ${{github.workspace}}
+      
