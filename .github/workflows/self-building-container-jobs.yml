@@ -15,7 +15,7 @@ jobs:
     container: 
       image: mcr.microsoft.com/dotnet/sdk:6.0
       volumes:
-        - ${{github.workspace}}/src # a volume to store contents to
+        - ${{github.workspace}}:/src # a volume to store contents to
     steps:
     - name: checkout
       uses: actions/checkout@4.2.2
