@@ -1,12 +1,14 @@
 name: Self building inside a container via workflow
 
 on:
-  push:
-    branches: ['main']
-    paths: 
-    - "frontend/**"
   workflow_dispatch:
-  
+  push:
+    branches: [ "feature/*" ]
+    paths:
+    - 'frontend/**'
+    - 'catalog/**'
+    - 'ordering/**'
+
 jobs:
   container_build:
     runs-on: ubutun-latest
