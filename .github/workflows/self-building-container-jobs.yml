@@ -11,7 +11,7 @@ on:
 
 jobs:
   container_build:
-    runs-on: ubutun-latest
+    runs-on: ubuntu-latest
     container: 
       image: mcr.microsoft.com/dotnet/sdk:9.0
       volumes:
