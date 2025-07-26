@@ -1,0 +1,35 @@
+name: Self building inside a container via workflow
+
+on:
+  push:
+    branches: ['main']
+    paths: 
+    - "frontend/**"
+  workflow_dispatch:
+  
+jobs:
+  container_build:
+    runs-on: ubutun-latest
+    container: 
+      image: mcr.microsoft.com/dotnet/sdk:6.0
+      volumes:
+        - ${{github.workspace}}/src # a volume to store contents to
+    steps:
+    - name: checkout
+      uses: actions/checkout@4
+
+    - name: dotnet build
+      run: |
+        dotnet restore
+        dotnet build --no-restore
+    - name: add markdown
+      run: |
+        dotnet add unittests/unittests.csproj package LiquidTestReports.Markdown
+    - name: Test
+      run: dotnet test --logger "liquid.md;logFilename=testResults.md"
+    - name: Output the results to summary page of workflow
+      run: cat $(find . -type f -name testResults.md) >> $GITHUB_STEP_SUMMARY
+    - name: Build with dotnet
+      run: dotnet build frontend/frontend.csproj --configuration Release
+
+    
