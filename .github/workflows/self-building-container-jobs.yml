@@ -13,7 +13,7 @@ jobs:
   container_build:
     runs-on: ubutun-latest
     container: 
-      image: mcr.microsoft.com/dotnet/sdk:6.0
+      image: mcr.microsoft.com/dotnet/sdk:9.0
       volumes:
         - ${{github.workspace}}/src # a volume to store contents to
     steps:
@@ -22,8 +22,7 @@ jobs:
 
     - name: dotnet build
       run: |
-        dotnet restore
-        dotnet build --no-restore
+        dotnet restore ; dotnet build --no-restore
     - name: add markdown
       run: |
         dotnet add unittests/unittests.csproj package LiquidTestReports.Markdown
