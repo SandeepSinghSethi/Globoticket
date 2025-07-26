@@ -18,8 +18,8 @@ jobs:
         - ${{github.workspace}}/src # a volume to store contents to
     steps:
     - name: checkout
-      uses: actions/checkout@4
-
+      uses: actions/checkout@4.2.2
+      
     - name: dotnet build
       run: |
         dotnet restore ; dotnet build --no-restore
