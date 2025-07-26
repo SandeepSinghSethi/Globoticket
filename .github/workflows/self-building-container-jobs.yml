@@ -13,7 +13,7 @@ jobs:
   container_build:
     runs-on: ubuntu-latest
     container: 
-      image: mcr.microsoft.com/dotnet/sdk:9.0
+      image: mcr.microsoft.com/dotnet/sdk:6.0
       volumes:
         - ${{github.workspace}}/src # a volume to store contents to
     steps:
