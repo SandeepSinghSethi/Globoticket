@@ -46,7 +46,7 @@ jobs:
       run: dotnet publish frontend/frontend.csproj -c Release -o app/publish
 
     - name: upload artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4.6.2
       with:
         name: frontend
         path: app/publish
