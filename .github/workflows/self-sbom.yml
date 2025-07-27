@@ -1,0 +1,26 @@
+name: Self compile and test fast feedback with sbom
+permissions:
+  actions: write
+  contents: read
+env:
+  GH_TOKEN: ${{github.token}}
+  
+on:
+  workflow_dispatch:
+
+jobs:
+  buildjob:
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/dotnet/sdk:9.0
+      volumes:
+        - ${{github.workspace}}:/src
+    steps:
+    - uses: actions/checkout@v4.2.2
+
+    - name: restoring and building
+      run: |
+        dotnet restore
+        dotnet build --no-restore --output BuildOutput
+    - name: test
+      run: dotnet test --no-build --verbosity normal
